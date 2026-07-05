@@ -59,6 +59,8 @@ public class AuthService {
         }
         userRepository.save(user);
         Role role = roles(user, String.valueOf(request.getRoleRequest()));
+        user.setRole(role);
+        userRepository.save(user);
         return new JWTResponse(
                 user.getEmail(),
                 jwtUtils.generateToken(user.getEmail()),
